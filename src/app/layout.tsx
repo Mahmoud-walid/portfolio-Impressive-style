@@ -238,17 +238,17 @@ export default function RootLayout({
   };
 
   const shellFallback = (
-    <div className="fixed inset-0 z-80 flex items-center justify-center bg-background px-4">
-      <div className="w-full max-w-lg border-4 border-black bg-card p-4 shadow-retro-lg sm:p-6">
-        <p className="font-pixel text-2xl uppercase text-foreground sm:text-3xl">
-          Muhammad Fiaz
+    <div className="bg-background fixed inset-0 z-80 flex items-center justify-center px-4">
+      <div className="bg-card shadow-retro-lg w-full max-w-lg border-4 border-black p-4 sm:p-6">
+        <p className="font-pixel text-foreground text-2xl uppercase sm:text-3xl">
+          Mahmoud Walid
         </p>
-        <p className="mt-2 text-sm font-black uppercase text-muted-foreground sm:text-base">
+        <p className="text-muted-foreground mt-2 text-sm font-black uppercase sm:text-base">
           Loading workspace
           <span className="animate-dots" />
         </p>
-        <div className="mt-5 h-7 border-4 border-black bg-muted p-1 sm:h-8">
-          <div className="h-full w-full animate-pulse border-2 border-black bg-primary" />
+        <div className="bg-muted mt-5 h-7 border-4 border-black p-1 sm:h-8">
+          <div className="bg-primary h-full w-full animate-pulse border-2 border-black" />
         </div>
       </div>
     </div>
@@ -301,8 +301,8 @@ export default function RootLayout({
               </main>
               <Footer />
               {/* Summer offer popup disabled on root layout: offer is no longer active. */}
-              {/* <BusinessScaleNotice /> */}
-              {/* <BusinessInquiryPopup /> */}
+              <BusinessScaleNotice />
+              <BusinessInquiryPopup />
               <CookieNotice />
               <ReleaseUpdateNotice />
             </div>
