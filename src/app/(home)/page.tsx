@@ -149,6 +149,8 @@ export default async function HomePage() {
           }}
         />
       ) : null}
+
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is serialized and escaped by serializeJsonLd */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
