@@ -137,26 +137,18 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        /* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is serialized and escaped */
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(homepageJsonLd) }}
-      />
+      <script type="application/ld+json">
+        {serializeJsonLd(homepageJsonLd)}
+      </script>
       {profileStatsJsonLd ? (
-        <script
-          type="application/ld+json"
-          /* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is serialized and escaped */
-          dangerouslySetInnerHTML={{
-            __html: serializeJsonLd(profileStatsJsonLd),
-          }}
-        />
+        <script type="application/ld+json">
+          {serializeJsonLd(profileStatsJsonLd)}
+        </script>
       ) : null}
 
-      <script
-        type="application/ld+json"
-        /* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is serialized and escaped */
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json">
+        {serializeJsonLd(breadcrumbJsonLd)}
+      </script>
 
       <HomePageClient
         initialRepos={initialRepos}
