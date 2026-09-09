@@ -34,6 +34,7 @@ const cookieStorage: StateStorage = {
       return;
     }
 
+    // biome-ignore lint/suspicious/noDocumentCookie: Zustand StateStorage requires synchronous cookie access
     document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; Path=/; Max-Age=31536000; SameSite=Lax`;
   },
   removeItem: (name) => {
@@ -41,6 +42,7 @@ const cookieStorage: StateStorage = {
       return;
     }
 
+    // biome-ignore lint/suspicious/noDocumentCookie: Zustand StateStorage requires synchronous cookie access
     document.cookie = `${encodeURIComponent(name)}=; Path=/; Max-Age=0; SameSite=Lax`;
   },
 };
