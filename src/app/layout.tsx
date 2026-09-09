@@ -265,23 +265,15 @@ export default function RootLayout({
           crossOrigin=""
         />
         <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(personJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: serializeJsonLd(organizationJsonLd),
-          }}
-        />
+        <script type="application/ld+json" suppressHydrationWarning>
+          {serializeJsonLd(personJsonLd)}
+        </script>
+        <script type="application/ld+json" suppressHydrationWarning>
+          {serializeJsonLd(websiteJsonLd)}
+        </script>
+        <script type="application/ld+json" suppressHydrationWarning>
+          {serializeJsonLd(organizationJsonLd)}
+        </script>
       </head>
       <body
         className={`${spaceGrotesk.variable} ${bungee.variable} ${pressStart.variable} antialiased`}
