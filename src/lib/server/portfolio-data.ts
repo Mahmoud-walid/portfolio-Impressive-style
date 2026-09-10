@@ -1,11 +1,11 @@
-import "server-only";
-import { cacheLife } from "next/cache";
+import 'server-only';
+import { cacheLife } from 'next/cache';
 import type {
   BlogPost,
   GitHubOverviewPayload,
   GithubRepo,
   HackatimePayload,
-} from "@/lib/portfolio-types";
+} from '@/lib/portfolio-types';
 
 interface GitHubUserResponse {
   login?: string;
@@ -122,14 +122,14 @@ async function safeJsonParse<T>(response: Response): Promise<T | null> {
 const DEFAULT_GITHUB_USER =
   process.env.GITHUB_USER ??
   process.env.NEXT_PUBLIC_GITHUB_USER ??
-  "muhammad-fiaz";
-const DEVTO_USER = "muhammadfiaz";
-const HASHNODE_HOST = "muhammadfiaz.hashnode.dev";
+  'mahmoud-walid';
+const DEVTO_USER = 'mahmoudwalid';
+const HASHNODE_HOST = 'mahmoudwalid.hashnode.dev';
 const GITHUB_CACHE_REVALIDATE_SECONDS = 60 * 60 * 12;
 
 async function getCurrentTimestamp() {
-  "use cache";
-  cacheLife("hours");
+  'use cache';
+  cacheLife('hours');
   return Date.now();
 }
 
@@ -141,7 +141,7 @@ function resolveGithubUser(user?: string): string {
 
 function getGithubHeaders(): HeadersInit {
   const headers: HeadersInit = {
-    Accept: "application/vnd.github+json",
+    Accept: 'application/vnd.github+json',
   };
 
   if (process.env.GITHUB_TOKEN) {
@@ -158,12 +158,12 @@ async function getAuthenticatedGithubLogin(
     return null;
   }
 
-  const response = await fetch("https://api.github.com/user", {
+  const response = await fetch('https://api.github.com/user', {
     headers,
-    cache: "force-cache",
+    cache: 'force-cache',
     next: {
       revalidate: GITHUB_CACHE_REVALIDATE_SECONDS,
-      tags: ["github-auth-user"],
+      tags: ['github-auth-user'],
     },
   });
 
@@ -196,7 +196,7 @@ export async function getGithubRepos(user?: string): Promise<GithubRepo[]> {
 
     const response = await fetch(endpoint, {
       headers,
-      cache: "force-cache",
+      cache: 'force-cache',
       next: {
         revalidate: GITHUB_CACHE_REVALIDATE_SECONDS,
         tags: [`github-repos-${username}`, `github-repos-${username}-p${page}`],
@@ -224,7 +224,7 @@ export async function getGithubRepos(user?: string): Promise<GithubRepo[]> {
   }
 
   return Array.from(dedupedById.values()).filter(
-    (repo) => !repo.name.startsWith("."),
+    (repo) => !repo.name.startsWith('.'),
   );
 }
 
@@ -244,11 +244,11 @@ export async function getGithubOverview(
 
   const userResponse = await fetch(
     canReadOwnerPrivateRepos
-      ? "https://api.github.com/user"
+      ? 'https://api.github.com/user'
       : `https://api.github.com/users/${username}`,
     {
       headers,
-      cache: "force-cache",
+      cache: 'force-cache',
       next: {
         revalidate: GITHUB_CACHE_REVALIDATE_SECONDS,
         tags: [`github-profile-${username}`],
@@ -260,12 +260,12 @@ export async function getGithubOverview(
     ? ((await safeJsonParse<GitHubUserResponse>(userResponse)) ?? {})
     : {};
 
-  const responseDateHeader = userResponse.headers.get("date");
+  const responseDateHeader = userResponse.headers.get('date');
   const referenceDate = new Date(
-    responseDateHeader ?? repos[0]?.updated_at ?? "1970-01-01T00:00:00Z",
+    responseDateHeader ?? repos[0]?.updated_at ?? '1970-01-01T00:00:00Z',
   );
   const rangeEndDate = Number.isNaN(referenceDate.getTime())
-    ? new Date("1970-01-01T00:00:00Z")
+    ? new Date('1970-01-01T00:00:00Z')
     : new Date(referenceDate);
   const commitYear = rangeEndDate.getUTCFullYear();
   rangeEndDate.setUTCHours(23, 59, 59, 999);
@@ -281,11 +281,11 @@ export async function getGithubOverview(
 
   // Use GraphQL contribution calendar when token is available for accurate yearly commits.
   if (process.env.GITHUB_TOKEN) {
-    const contributionResponse = await fetch("https://api.github.com/graphql", {
-      method: "POST",
+    const contributionResponse = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         query: `
@@ -310,7 +310,7 @@ export async function getGithubOverview(
           to: rangeEnd,
         },
       }),
-      cache: "force-cache",
+      cache: 'force-cache',
       next: {
         revalidate: GITHUB_CACHE_REVALIDATE_SECONDS,
         tags: [`github-contributions-${username}-${commitYear}`],
@@ -324,7 +324,7 @@ export async function getGithubOverview(
       const days =
         payload?.data?.user?.contributionsCollection?.contributionCalendar?.weeks
           ?.flatMap((week) => week.contributionDays ?? [])
-          .filter((day) => typeof day.date === "string") ?? [];
+          .filter((day) => typeof day.date === 'string') ?? [];
 
       commitHistory = days.map((day) => ({
         date: day.date,
@@ -373,18 +373,18 @@ export async function getGithubOverview(
     }));
 
   const monthOrder = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
   const monthlyMap = new Map<string, number>();
 
@@ -394,7 +394,7 @@ export async function getGithubOverview(
       continue;
     }
 
-    const month = monthOrder[date.getUTCMonth()] ?? "Unknown";
+    const month = monthOrder[date.getUTCMonth()] ?? 'Unknown';
     monthlyMap.set(month, (monthlyMap.get(month) ?? 0) + day.commits);
   }
 
@@ -462,12 +462,12 @@ async function fetchHashnodePosts(): Promise<BlogPost[]> {
     }
   `;
 
-  const response = await fetch("https://gql.hashnode.com", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+  const response = await fetch('https://gql.hashnode.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables: { host: HASHNODE_HOST } }),
-    cache: "force-cache",
-    next: { revalidate: 3600, tags: ["blogs", "hashnode"] },
+    cache: 'force-cache',
+    next: { revalidate: 3600, tags: ['blogs', 'hashnode'] },
   });
 
   if (!response.ok) return [];
@@ -480,7 +480,7 @@ async function fetchHashnodePosts(): Promise<BlogPost[]> {
     title: node.title,
     excerpt: node.brief,
     url: node.url,
-    source: "Hashnode",
+    source: 'Hashnode',
     tags: node.tags.map((tag) => tag.name),
     publishedAt: node.publishedAt,
     readingMinutes: node.readTimeInMinutes,
@@ -491,8 +491,8 @@ async function fetchDevToPosts(): Promise<BlogPost[]> {
   const response = await fetch(
     `https://dev.to/api/articles?username=${DEVTO_USER}&per_page=100`,
     {
-      cache: "force-cache",
-      next: { revalidate: 3600, tags: ["blogs", "devto"] },
+      cache: 'force-cache',
+      next: { revalidate: 3600, tags: ['blogs', 'devto'] },
     },
   );
 
@@ -505,7 +505,7 @@ async function fetchDevToPosts(): Promise<BlogPost[]> {
     title: post.title,
     excerpt: post.description,
     url: post.url,
-    source: "Dev.to",
+    source: 'Dev.to',
     tags: post.tag_list,
     publishedAt: post.published_at,
     readingMinutes: post.reading_time_minutes,
@@ -530,65 +530,65 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getHackatimeStats(): Promise<HackatimePayload | null> {
   const provider =
-    process.env.CODING_STATS_PROVIDER === "hackatime"
-      ? "hackatime"
-      : "wakatime";
+    process.env.CODING_STATS_PROVIDER === 'hackatime'
+      ? 'hackatime'
+      : 'wakatime';
   const apiKey =
-    provider === "hackatime"
+    provider === 'hackatime'
       ? process.env.HACKATIME_API_KEY
       : process.env.WAKATIME_API_KEY;
 
   if (!apiKey) return null;
 
   const baseUrl =
-    provider === "wakatime"
-      ? "https://wakatime.com"
+    provider === 'wakatime'
+      ? 'https://wakatime.com'
       : (
-          process.env.HACKATIME_API_BASE_URL ?? "https://hackatime.hackclub.com"
-        ).replace(/\/$/, "");
+          process.env.HACKATIME_API_BASE_URL ?? 'https://hackatime.hackclub.com'
+        ).replace(/\/$/, '');
 
   const sevenDayUrl =
-    provider === "wakatime"
+    provider === 'wakatime'
       ? `${baseUrl}/api/v1/users/current/stats/last_7_days?api_key=${apiKey}`
       : `${baseUrl}/api/hackatime/v1/users/current/stats/last_7_days?api_key=${apiKey}`;
 
   const allTimeUrl =
-    provider === "wakatime"
+    provider === 'wakatime'
       ? `${baseUrl}/api/v1/users/current/all_time_since_today?api_key=${apiKey}`
       : `${baseUrl}/api/hackatime/v1/users/current/all_time_since_today?api_key=${apiKey}`;
 
   const todayStatusUrl =
-    provider === "wakatime"
+    provider === 'wakatime'
       ? `${baseUrl}/api/v1/users/current/statusbar/today?api_key=${apiKey}`
       : `${baseUrl}/api/hackatime/v1/users/current/statusbar/today?api_key=${apiKey}`;
 
   const [sevenDayResponse, allTimeResponse, todayStatusResponse] =
     await Promise.all([
       fetch(sevenDayUrl, {
-        cache: "force-cache",
+        cache: 'force-cache',
         next: {
           revalidate: 1800,
-          tags: ["coding-time", "coding-time-seven-days"],
+          tags: ['coding-time', 'coding-time-seven-days'],
         },
         headers: {
           Authorization: `Bearer ${apiKey}`,
         },
       }),
       fetch(allTimeUrl, {
-        cache: "force-cache",
+        cache: 'force-cache',
         next: {
           revalidate: 1800,
-          tags: ["coding-time", "coding-time-total"],
+          tags: ['coding-time', 'coding-time-total'],
         },
         headers: {
           Authorization: `Bearer ${apiKey}`,
         },
       }).catch(() => null),
       fetch(todayStatusUrl, {
-        cache: "force-cache",
+        cache: 'force-cache',
         next: {
           revalidate: 300,
-          tags: ["coding-time", "coding-time-today"],
+          tags: ['coding-time', 'coding-time-today'],
         },
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -618,7 +618,7 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
         data: {
           grand_total: {
             total_seconds: 0,
-            text: "0h today",
+            text: '0h today',
           },
         },
       })
@@ -626,13 +626,13 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
         data: {
           grand_total: {
             total_seconds: 0,
-            text: "0h today",
+            text: '0h today',
           },
         },
       };
 
   const daysFromStats = (sevenDay.data?.days ?? []).map((day) => ({
-    day: new Date(day.date).toLocaleDateString("en-US", { weekday: "short" }),
+    day: new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' }),
     hours: Number(toHours(day.grand_total?.total_seconds ?? 0).toFixed(2)),
   }));
 
@@ -645,10 +645,10 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
       return fetch(
         `${baseUrl}/api/v1/users/current/heartbeats?date=${date.toISOString().slice(0, 10)}&api_key=${apiKey}`,
         {
-          cache: "force-cache",
+          cache: 'force-cache',
           next: {
             revalidate: 1800,
-            tags: ["coding-time", "coding-time-heartbeats"],
+            tags: ['coding-time', 'coding-time-heartbeats'],
           },
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -658,7 +658,7 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
         .then(async (response) => {
           if (!response.ok) {
             return {
-              day: date.toLocaleDateString("en-US", { weekday: "short" }),
+              day: date.toLocaleDateString('en-US', { weekday: 'short' }),
               hours: 0,
             };
           }
@@ -676,12 +676,12 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
             ) ?? 0;
 
           return {
-            day: date.toLocaleDateString("en-US", { weekday: "short" }),
+            day: date.toLocaleDateString('en-US', { weekday: 'short' }),
             hours: Number(toHours(durationSeconds).toFixed(2)),
           };
         })
         .catch(() => ({
-          day: date.toLocaleDateString("en-US", { weekday: "short" }),
+          day: date.toLocaleDateString('en-US', { weekday: 'short' }),
           hours: 0,
         }));
     });
@@ -717,14 +717,14 @@ export async function getHackatimeStats(): Promise<HackatimePayload | null> {
     process.env.HACKATIME_USERNAME ||
     DEFAULT_GITHUB_USER;
 
-  if (hackatimeUsername && provider === "hackatime") {
+  if (hackatimeUsername && provider === 'hackatime') {
     const allTimeHackclubResponse = await fetch(
       `${baseUrl}/api/v1/users/${encodeURIComponent(hackatimeUsername)}/stats?api_key=${apiKey}`,
       {
-        cache: "force-cache",
+        cache: 'force-cache',
         next: {
           revalidate: 1800,
-          tags: ["coding-time", "coding-time-hackclub-total"],
+          tags: ['coding-time', 'coding-time-hackclub-total'],
         },
         headers: {
           Authorization: `Bearer ${apiKey}`,

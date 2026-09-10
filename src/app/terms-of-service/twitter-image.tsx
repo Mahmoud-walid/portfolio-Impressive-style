@@ -1,14 +1,14 @@
-import { buildTwitterImage, ogContentType, ogSize } from "@/lib/og-image";
+import { buildTwitterImage, ogContentType, ogSize } from '@/lib/og-image';
 
-export const alt = "Terms of Service | Muhammad Fiaz";
+export const alt = 'Terms of Service | Mahmoud Walid';
 export const size = ogSize;
 export const contentType = ogContentType;
 
 export default function Image() {
   return buildTwitterImage({
-    eyebrow: "Terms Of Service",
-    title: "Muhammad Fiaz",
-    subtitle: "Legal And Delivery Terms",
-    accent: "accent",
+    eyebrow: 'Terms Of Service',
+    title: 'Mahmoud Walid',
+    subtitle: 'Legal And Delivery Terms',
+    accent: 'accent',
   });
 }

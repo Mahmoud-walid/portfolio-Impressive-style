@@ -1,58 +1,58 @@
-import type { Metadata } from "next";
-import { ContactPageClient } from "@/components/pages/contact-page-client";
-import { siteUrl } from "@/lib/site-config";
+import type { Metadata } from 'next';
+import { ContactPageClient } from '@/components/pages/contact-page-client';
+import { siteUrl } from '@/lib/site-config';
 
 const contactOgImageUrl = `${siteUrl}/contact/opengraph-image`;
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: 'Contact',
   description:
-    "Contact Muhammad Fiaz for projects, consulting, and collaborations.",
+    'Contact Mahmoud Walid for projects, consulting, and collaborations.',
   alternates: {
-    canonical: "/contact",
+    canonical: '/contact',
   },
   keywords: [
-    "contact muhammad fiaz",
-    "hire full stack developer",
-    "project inquiry",
-    "software consulting",
+    'contact Mahmoud Walid',
+    'hire frontend engineer',
+    'project inquiry',
+    'software consulting',
   ],
   openGraph: {
-    title: "Contact Muhammad Fiaz",
+    title: 'Contact Mahmoud Walid',
     description:
-      "Send project goals and timelines for software execution, consulting, and delivery.",
+      'Send project goals and timelines for software execution, consulting, and delivery.',
     url: `${siteUrl}/contact`,
-    type: "website",
+    type: 'website',
     images: [
       {
         url: contactOgImageUrl,
         width: 1200,
         height: 630,
-        alt: "Contact Muhammad Fiaz",
+        alt: 'Contact Mahmoud Walid',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Contact Muhammad Fiaz",
+    card: 'summary_large_image',
+    title: 'Contact Mahmoud Walid',
     description:
-      "Send project goals and timelines for software execution, consulting, and delivery.",
+      'Send project goals and timelines for software execution, consulting, and delivery.',
     images: [contactOgImageUrl],
   },
 };
 
 function serializeJsonLd(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
+  return JSON.stringify(value).replace(/</g, '\\u003c');
 }
 
 export default function ContactPage() {
   const contactJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "Contact Muhammad Fiaz",
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Mahmoud Walid',
     url: `${siteUrl}/contact`,
     description:
-      "Contact page for project collaboration and software services.",
+      'Contact page for project collaboration and software services.',
   };
 
   return (

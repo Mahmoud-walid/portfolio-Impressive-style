@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Avatar } from "@/components/retroui/Avatar";
-import { Button } from "@/components/retroui/Button";
-import { Github, LogOut } from "@/components/retroui/icons";
-import { authClient } from "@/lib/auth-client";
+import { useRouter } from 'next/navigation';
+import { Avatar } from '@/components/retroui/Avatar';
+import { Button } from '@/components/retroui/Button';
+import { Github, LogOut } from '@/components/retroui/icons';
+import { authClient } from '@/lib/auth-client';
 
 type SessionUser = {
   name?: string | null;
@@ -13,7 +13,7 @@ type SessionUser = {
   avatarUrl?: string | null;
 };
 
-export function SignInButton({ className = "" }: { className?: string }) {
+export function SignInButton({ className = '' }: { className?: string }) {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user as SessionUser | undefined;
@@ -21,13 +21,13 @@ export function SignInButton({ className = "" }: { className?: string }) {
   const handleSignIn = async () => {
     try {
       await authClient.signIn.social({
-        provider: "github",
+        provider: 'github',
         callbackURL: window.location.pathname,
       });
       router.refresh();
     } catch {
       window.location.href =
-        "/api/auth/sign-in/social?provider=github&callbackURL=/";
+        '/api/auth/sign-in/social?provider=github&callbackURL=/';
     }
   };
 
@@ -41,23 +41,23 @@ export function SignInButton({ className = "" }: { className?: string }) {
 
   if (user) {
     const initialsSource =
-      user.name?.trim() || user.email?.trim() || "Muhammad Fiaz";
+      user.name?.trim() || user.email?.trim() || 'Mahmoud Walid';
     const initials = initialsSource
       .split(/\s+/)
       .filter(Boolean)
       .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("");
+      .map((part) => part[0]?.toUpperCase() ?? '')
+      .join('');
     const avatarSrc = user.image ?? user.avatarUrl ?? undefined;
 
     return (
       <div className="flex items-center gap-2">
-        <Avatar className="h-10 w-10 border-4 border-black shadow-retro-sm">
+        <Avatar className="shadow-retro-sm h-10 w-10 border-4 border-black">
           {avatarSrc ? (
-            <Avatar.Image src={avatarSrc} alt={user.name ?? "User"} />
+            <Avatar.Image src={avatarSrc} alt={user.name ?? 'User'} />
           ) : null}
           <Avatar.Fallback className="text-xs font-black uppercase">
-            {initials || "MF"}
+            {initials || 'MF'}
           </Avatar.Fallback>
         </Avatar>
         <Button

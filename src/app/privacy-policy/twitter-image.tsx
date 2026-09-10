@@ -1,14 +1,14 @@
-import { buildTwitterImage, ogContentType, ogSize } from "@/lib/og-image";
+import { buildTwitterImage, ogContentType, ogSize } from '@/lib/og-image';
 
-export const alt = "Privacy Policy | Muhammad Fiaz";
+export const alt = 'Privacy Policy | Mahmoud Walid';
 export const size = ogSize;
 export const contentType = ogContentType;
 
 export default function Image() {
   return buildTwitterImage({
-    eyebrow: "Privacy Policy",
-    title: "Muhammad Fiaz",
-    subtitle: "Data Use And Protection",
-    accent: "secondary",
+    eyebrow: 'Privacy Policy',
+    title: 'Mahmoud Walid',
+    subtitle: 'Data Use And Protection',
+    accent: 'secondary',
   });
 }

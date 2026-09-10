@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { HomePageClient } from "@/components/portfolio/home-page-client";
+import type { Metadata } from 'next';
+import { HomePageClient } from '@/components/portfolio/home-page-client';
 import {
   getBlogPosts,
   getGithubOverview,
   getGithubRepos,
   getHackatimeStats,
-} from "@/lib/server/portfolio-data";
+} from '@/lib/server/portfolio-data';
 import {
   donationUrl,
-  fiazDevUrl,
+  devUrl,
   githubUrl,
   hackatimeUrl,
   linkedinUrl,
@@ -17,50 +17,50 @@ import {
   siteUrl,
   sponsorUrl,
   xUrl,
-} from "@/lib/site-config";
+} from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Muhammad Fiaz",
+    absolute: 'Mahmoud Walid',
   },
   description:
-    "Muhammad Fiaz portfolio: founder, entrepreneur, full stack developer and open-source contributor.",
+    'Mahmoud Walid portfolio: 3 years of experience | Frontend engineer | open-source contributor.',
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
   keywords: [
-    "Muhammad Fiaz portfolio",
-    "full stack developer",
-    "startup engineer",
-    "open source projects",
-    "software services",
+    'Mahmoud Walid portfolio',
+    'frontend engineer',
+    'startup engineer',
+    'open source projects',
+    'software services',
   ],
   openGraph: {
-    title: "Muhammad Fiaz | Founder, Entrepreneur, Full Stack Developer",
+    title: 'Mahmoud Walid | Founder, Entrepreneur, Full Stack Developer',
     description:
-      "Business-first product engineering and open-source execution.",
+      'Business-first product engineering and open-source execution.',
     url: siteUrl,
-    type: "website",
+    type: 'website',
     images: [
       {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "Muhammad Fiaz Portfolio Home",
+        alt: 'Mahmoud Walid Portfolio Home',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Muhammad Fiaz",
+    card: 'summary_large_image',
+    title: 'Mahmoud Walid',
     description:
-      "Business-first product engineering and open-source execution.",
+      'Business-first product engineering and open-source execution.',
     images: [ogImageUrl],
   },
 };
 
 function serializeJsonLd(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
+  return JSON.stringify(value).replace(/</g, '\\u003c');
 }
 
 async function safeFetch<T>(fallback: T, fn: () => Promise<T>): Promise<T> {
@@ -81,55 +81,48 @@ export default async function HomePage() {
     ]);
 
   const homepageJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Muhammad Fiaz Portfolio",
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Mahmoud Walid Portfolio',
     url: siteUrl,
-    description: "Founder, entrepreneur, and full stack developer portfolio.",
+    description: 'Founder, entrepreneur, and full stack developer portfolio.',
     mainEntity: {
-      "@type": "Person",
-      name: "Muhammad Fiaz",
+      '@type': 'Person',
+      name: 'Mahmoud Walid',
       url: siteUrl,
-      sameAs: [
-        githubUrl,
-        linkedinUrl,
-        xUrl,
-        hackatimeUrl,
-        linkHubUrl,
-        fiazDevUrl,
-      ],
+      sameAs: [githubUrl, linkedinUrl, xUrl, hackatimeUrl, linkHubUrl, devUrl],
     },
-    significantLink: [linkHubUrl, sponsorUrl, donationUrl, fiazDevUrl],
+    significantLink: [linkHubUrl, sponsorUrl, donationUrl, devUrl],
   };
 
   const profileStatsJsonLd = initialGitHubOverview
     ? {
-        "@context": "https://schema.org",
-        "@type": "Dataset",
-        name: "Muhammad Fiaz GitHub Portfolio Stats",
+        '@context': 'https://schema.org',
+        '@type': 'Dataset',
+        name: 'Mahmoud Walid GitHub Portfolio Stats',
         description:
-          "Live GitHub repository, stars, forks, and watcher metrics.",
-        license: "https://opensource.org/licenses/MIT",
+          'Live GitHub repository, stars, forks, and watcher metrics.',
+        license: 'https://opensource.org/licenses/MIT',
         creator: {
-          "@type": "Person",
-          name: "Muhammad Fiaz",
+          '@type': 'Person',
+          name: 'Mahmoud Walid',
         },
         distribution: {
-          "@type": "DataDownload",
+          '@type': 'DataDownload',
           contentUrl: `${siteUrl}/api/portfolio/github-overview`,
-          encodingFormat: "application/json",
+          encodingFormat: 'application/json',
         },
       }
     : null;
 
   const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
-        name: "Home",
+        name: 'Home',
         item: siteUrl,
       },
     ],

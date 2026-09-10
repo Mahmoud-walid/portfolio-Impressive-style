@@ -1,5 +1,5 @@
-import { betterAuth } from "better-auth";
-import { memoryAdapter } from "better-auth/adapters/memory";
+import { betterAuth } from 'better-auth';
+import { memoryAdapter } from 'better-auth/adapters/memory';
 
 const memoryDb = {
   user: [],
@@ -9,15 +9,15 @@ const memoryDb = {
 };
 
 export const auth = betterAuth({
-  appName: "Muhammad Fiaz Portfolio",
+  appName: 'Mahmoud Walid Portfolio',
   secret:
     process.env.BETTER_AUTH_SECRET ??
     process.env.NEXTAUTH_SECRET ??
-    "dev-only-secret-change-in-production",
+    'dev-only-secret-change-in-production',
   baseURL:
     process.env.BETTER_AUTH_URL ??
     process.env.NEXT_PUBLIC_SITE_URL ??
-    "http://localhost:3000",
+    'http://localhost:3000',
   database: memoryAdapter(memoryDb),
   socialProviders:
     process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET

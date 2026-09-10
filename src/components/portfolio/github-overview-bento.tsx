@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { animate, stagger } from "animejs";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { Badge } from "@/components/retroui/Badge";
-import { BentoCard, BentoGrid } from "@/components/retroui/Bento";
-import { Button } from "@/components/retroui/Button";
-import { BarChart } from "@/components/retroui/charts/BarChart";
-import { LineChart } from "@/components/retroui/charts/LineChart";
-import type { GitHubOverviewPayload } from "@/lib/portfolio-types";
-import { githubSnakeGraphUrl, githubUrl } from "@/lib/site-config";
+import { animate, stagger } from 'animejs';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+import { Badge } from '@/components/retroui/Badge';
+import { BentoCard, BentoGrid } from '@/components/retroui/Bento';
+import { Button } from '@/components/retroui/Button';
+import { BarChart } from '@/components/retroui/charts/BarChart';
+import { LineChart } from '@/components/retroui/charts/LineChart';
+import type { GitHubOverviewPayload } from '@/lib/portfolio-types';
+import { githubSnakeGraphUrl, githubUrl } from '@/lib/site-config';
 
 export function GithubOverviewBento({
   stats,
@@ -23,16 +23,16 @@ export function GithubOverviewBento({
     const root = sectionRef.current;
     if (
       !root ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
       return;
     }
 
     const cards = Array.from(
-      root.querySelectorAll("[data-gh-card]"),
+      root.querySelectorAll('[data-gh-card]'),
     ) as HTMLElement[];
     const pills = Array.from(
-      root.querySelectorAll("[data-gh-pill]"),
+      root.querySelectorAll('[data-gh-pill]'),
     ) as HTMLElement[];
 
     if (cards.length > 0) {
@@ -41,7 +41,7 @@ export function GithubOverviewBento({
         translateY: [10, 0],
         delay: stagger(40, { start: 50 }),
         duration: 320,
-        ease: "outCubic",
+        ease: 'outCubic',
       });
     }
 
@@ -51,14 +51,14 @@ export function GithubOverviewBento({
         scale: [0.92, 1],
         delay: stagger(35, { start: 260 }),
         duration: 380,
-        ease: "outBack",
+        ease: 'outBack',
       });
     }
   }, []);
 
   if (!stats) {
     return (
-      <div className="border-4 border-black bg-card p-6 text-center font-black uppercase shadow-retro-md">
+      <div className="bg-card shadow-retro-md border-4 border-black p-6 text-center font-black uppercase">
         GitHub overview is unavailable right now.
       </div>
     );
@@ -69,28 +69,28 @@ export function GithubOverviewBento({
   );
   const insightsData = [
     {
-      metric: "Stars Avg",
+      metric: 'Stars Avg',
       value: Math.max(
         0,
         Math.round(stats.totalStars / Math.max(stats.totalRepositories, 1)),
       ),
     },
     {
-      metric: "Forks Avg",
+      metric: 'Forks Avg',
       value: Math.max(
         0,
         Math.round(stats.totalForks / Math.max(stats.totalRepositories, 1)),
       ),
     },
     {
-      metric: "Watch Avg",
+      metric: 'Watch Avg',
       value: Math.max(
         0,
         Math.round(stats.totalWatchers / Math.max(stats.totalRepositories, 1)),
       ),
     },
     {
-      metric: "Public Repos",
+      metric: 'Public Repos',
       value: stats.publicRepos,
     },
   ];
@@ -100,49 +100,49 @@ export function GithubOverviewBento({
       <BentoGrid className="mx-auto w-full">
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-4 self-start"
+          className="self-start sm:col-span-2 lg:col-span-4"
         >
           <p className="font-display text-2xl uppercase">GitHub Pulse</p>
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#ffe08a] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#ffe08a] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Followers {stats.followers}
             </Badge>
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#8cf5ff] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#8cf5ff] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Following {stats.following}
             </Badge>
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#b7ff66] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#b7ff66] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Repos {stats.totalRepositories}
             </Badge>
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#ffd146] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#ffd146] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Stars {stats.totalStars}
             </Badge>
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#ff9ac2] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#ff9ac2] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Forks {stats.totalForks}
             </Badge>
             <Badge
               data-gh-pill
               variant="surface"
-              className="justify-center border-2 border-black bg-[#c6a8ff] px-3 py-3 text-center text-sm font-black uppercase text-black"
+              className="justify-center border-2 border-black bg-[#c6a8ff] px-3 py-3 text-center text-sm font-black text-black uppercase"
             >
               Watch {stats.totalWatchers}
             </Badge>
@@ -151,19 +151,19 @@ export function GithubOverviewBento({
 
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-4 self-start"
+          className="self-start sm:col-span-2 lg:col-span-4"
         >
           <p className="font-display text-2xl uppercase">Github Graphs</p>
-          <p className="mt-1 text-xs font-bold uppercase text-muted-foreground">
+          <p className="text-muted-foreground mt-1 text-xs font-bold uppercase">
             Contribution snake graph, live from GitHub profile output.
           </p>
-          <div className="mt-4 overflow-hidden border-4 border-black bg-muted p-2 shadow-retro-sm sm:p-3">
+          <div className="bg-muted shadow-retro-sm mt-4 overflow-hidden border-4 border-black p-2 sm:p-3">
             <Image
               src={githubSnakeGraphUrl}
-              alt="Muhammad Fiaz GitHub contribution snake graph"
+              alt="Mahmoud Walid GitHub contribution snake graph"
               width={1200}
               height={260}
-              className="h-auto w-full border-2 border-black bg-card"
+              className="bg-card h-auto w-full border-2 border-black"
               priority={false}
               loading="lazy"
               unoptimized
@@ -182,7 +182,7 @@ export function GithubOverviewBento({
 
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-2 self-start min-h-96 h-full"
+          className="h-full min-h-96 self-start sm:col-span-2 lg:col-span-2"
         >
           <p className="font-display text-2xl uppercase">
             Top Repositories by Stars
@@ -191,11 +191,11 @@ export function GithubOverviewBento({
             <BarChart
               data={stats.topRepositories}
               index="name"
-              categories={["stars"]}
+              categories={['stars']}
               className="h-72"
               isAnimationActive={false}
-              fillColors={["var(--chart-1)"]}
-              strokeColors={["var(--foreground)"]}
+              fillColors={['var(--chart-1)']}
+              strokeColors={['var(--foreground)']}
               valueFormatter={(value) => `${value}`}
             />
           </div>
@@ -203,25 +203,25 @@ export function GithubOverviewBento({
 
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-2 self-start min-h-96 h-full"
+          className="h-full min-h-96 self-start sm:col-span-2 lg:col-span-2"
         >
           <p className="font-display text-2xl uppercase">
             Languages Used Across Projects
           </p>
-          <div className="retro-scrollbar mt-3 max-h-96 overflow-y-auto overflow-x-hidden pr-2">
+          <div className="retro-scrollbar mt-3 max-h-96 overflow-x-hidden overflow-y-auto pr-2">
             <BarChart
               data={languageChartData}
               index="language"
-              categories={["repos"]}
-              className="h-112 w-full min-h-112"
+              categories={['repos']}
+              className="h-112 min-h-112 w-full"
               alignment="horizontal"
               isAnimationActive={false}
               horizontalYAxisWidth={116}
               horizontalCategoryFormatter={(value) =>
                 value.length > 12 ? `${value.slice(0, 11)}.` : value
               }
-              fillColors={["var(--chart-1)"]}
-              strokeColors={["var(--foreground)"]}
+              fillColors={['var(--chart-1)']}
+              strokeColors={['var(--foreground)']}
               valueFormatter={(value) => `${value}`}
             />
           </div>
@@ -229,7 +229,7 @@ export function GithubOverviewBento({
 
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-2 self-start min-h-96 h-full"
+          className="h-full min-h-96 self-start sm:col-span-2 lg:col-span-2"
         >
           <p className="font-display text-2xl uppercase">
             Repository Activity by Month
@@ -238,10 +238,10 @@ export function GithubOverviewBento({
             <LineChart
               data={stats.monthlyActivity}
               index="month"
-              categories={["repos"]}
+              categories={['repos']}
               className="h-72"
               isAnimationActive={false}
-              strokeColors={["var(--chart-2)"]}
+              strokeColors={['var(--chart-2)']}
               valueFormatter={(value) => `${value}`}
             />
           </div>
@@ -249,23 +249,23 @@ export function GithubOverviewBento({
 
         <BentoCard
           data-gh-card
-          className="sm:col-span-2 lg:col-span-2 self-start min-h-96 h-full"
+          className="h-full min-h-96 self-start sm:col-span-2 lg:col-span-2"
         >
           <p className="font-display text-2xl uppercase">GitHub Insights</p>
           <div className="mt-4 h-72 w-full">
             <BarChart
               data={insightsData}
               index="metric"
-              categories={["value"]}
+              categories={['value']}
               className="h-72"
               alignment="horizontal"
               isAnimationActive={false}
-              fillColors={["var(--chart-3)"]}
-              strokeColors={["var(--foreground)"]}
+              fillColors={['var(--chart-3)']}
+              strokeColors={['var(--foreground)']}
               valueFormatter={(value) => `${value}`}
             />
           </div>
-          <p className="mt-4 text-sm font-medium leading-relaxed">
+          <p className="mt-4 text-sm leading-relaxed font-medium">
             Live snapshot based on your current GitHub repository portfolio and
             profile engagement metrics.
           </p>

@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatedNumberTicker } from "@/components/portfolio/animated-number-ticker";
-import { BentoCard, BentoGrid } from "@/components/retroui/Bento";
-import { Button } from "@/components/retroui/Button";
-import { BarChart } from "@/components/retroui/charts/BarChart";
-import { PieChart } from "@/components/retroui/charts/PieChart";
-import type { HackatimePayload } from "@/lib/portfolio-types";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { AnimatedNumberTicker } from '@/components/portfolio/animated-number-ticker';
+import { BentoCard, BentoGrid } from '@/components/retroui/Bento';
+import { Button } from '@/components/retroui/Button';
+import { BarChart } from '@/components/retroui/charts/BarChart';
+import { PieChart } from '@/components/retroui/charts/PieChart';
+import type { HackatimePayload } from '@/lib/portfolio-types';
 
 function splitNumericText(input: string) {
   const match = input.match(/[\d,.]+/);
   if (!match) {
-    return { value: 0, suffix: "" };
+    return { value: 0, suffix: '' };
   }
 
-  const numericText = match[0].replace(/,/g, "");
+  const numericText = match[0].replace(/,/g, '');
   const value = Number.parseFloat(numericText);
-  const suffix = input.replace(match[0], "").trim();
+  const suffix = input.replace(match[0], '').trim();
 
   return {
     value: Number.isFinite(value) ? value : 0,
@@ -34,15 +34,15 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
   }, []);
 
   const isWakatime =
-    process.env.NEXT_PUBLIC_CODING_STATS_PROVIDER !== "hackatime";
-  const providerName = isWakatime ? "Wakatime" : "Hackatime";
+    process.env.NEXT_PUBLIC_CODING_STATS_PROVIDER !== 'hackatime';
+  const providerName = isWakatime ? 'Wakatime' : 'Hackatime';
   const providerLink = isWakatime
-    ? "https://wakatime.com/@muhammadfiaz"
-    : "https://hackatime.hackclub.com/@muhammadfiaz";
+    ? 'https://wakatime.com/@909ead20-b87c-4d68-b67c-73cecbc0418a'
+    : 'https://hackatime.hackclub.com/@mahmoud-walid';
 
   if (!stats) {
     return (
-      <div className="border-4 border-black bg-card p-6 text-center font-bold uppercase shadow-retro-md">
+      <div className="bg-card shadow-retro-md border-4 border-black p-6 text-center font-bold uppercase">
         {providerName} data is unavailable right now. Please check server API
         key.
       </div>
@@ -58,16 +58,16 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
   const last7DaysTotal = splitNumericText(stats.last7DaysTotalHours);
   const dailyAverage = splitNumericText(stats.dailyAverage);
   const activeDayChartData = [
-    { label: "Active", days: stats.activeDaysLast7 },
-    { label: "Inactive", days: Math.max(0, 7 - stats.activeDaysLast7) },
+    { label: 'Active', days: stats.activeDaysLast7 },
+    { label: 'Inactive', days: Math.max(0, 7 - stats.activeDaysLast7) },
   ];
   const todayVsAverageData = [
     {
-      label: "Today",
+      label: 'Today',
       hours: Number((stats.todaySeconds / 3600).toFixed(2)),
     },
     {
-      label: "Avg",
+      label: 'Avg',
       hours: Number((stats.dailyAverageHours ?? 0).toFixed(2)),
     },
   ];
@@ -80,22 +80,22 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
         <p className="font-display text-2xl uppercase">
           Today on {providerName}
         </p>
-        <p className="mt-2 text-xs font-black uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-xs font-black uppercase">
           {stats.todayHours ||
-            "Today&apos;s coding time will appear once activity is tracked"}
+            'Today&apos;s coding time will appear once activity is tracked'}
         </p>
         <div className="mt-3 h-52 w-full min-w-0 overflow-hidden">
           <BarChart
             data={todayVsAverageData}
             index="label"
-            categories={["hours"]}
+            categories={['hours']}
             className="h-52"
-            fillColors={["var(--chart-3)"]}
-            strokeColors={["var(--foreground)"]}
+            fillColors={['var(--chart-3)']}
+            strokeColors={['var(--foreground)']}
             valueFormatter={(value) => `${value}h`}
           />
         </div>
-        <p className="mt-2 text-sm font-bold uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-sm font-bold uppercase">
           Live validated data from {providerName} statusbar API
         </p>
       </BentoCard>
@@ -109,14 +109,14 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
           <BarChart
             data={activeDayChartData}
             index="label"
-            categories={["days"]}
+            categories={['days']}
             className="h-52"
-            fillColors={["var(--chart-1)"]}
-            strokeColors={["var(--foreground)"]}
+            fillColors={['var(--chart-1)']}
+            strokeColors={['var(--foreground)']}
             valueFormatter={(value) => `${value}d`}
           />
         </div>
-        <p className="mt-2 text-center text-sm font-bold uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-center text-sm font-bold uppercase">
           Days with tracked coding activity
         </p>
       </BentoCard>
@@ -129,10 +129,10 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
           <AnimatedNumberTicker
             value={last7DaysTotal.value}
             decimals={1}
-            suffix={last7DaysTotal.suffix ? ` ${last7DaysTotal.suffix}` : "h"}
+            suffix={last7DaysTotal.suffix ? ` ${last7DaysTotal.suffix}` : 'h'}
           />
         </p>
-        <p className="mt-2 text-sm font-bold uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-sm font-bold uppercase">
           Rolling 7-day coding total
         </p>
       </BentoCard>
@@ -144,16 +144,16 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
             <BarChart
               data={stats.last7Days}
               index="day"
-              categories={["hours"]}
+              categories={['hours']}
               className="h-64"
-              fillColors={["var(--chart-2)"]}
-              strokeColors={["var(--foreground)"]}
+              fillColors={['var(--chart-2)']}
+              strokeColors={['var(--foreground)']}
               valueFormatter={(value) => `${value}h`}
             />
           ) : stats.hasActivity ? (
-            <div className="h-64 border-4 border-black bg-muted" />
+            <div className="bg-muted h-64 border-4 border-black" />
           ) : (
-            <div className="flex h-64 items-center justify-center border-4 border-black bg-muted p-4 text-center text-sm font-black uppercase">
+            <div className="bg-muted flex h-64 items-center justify-center border-4 border-black p-4 text-center text-sm font-black uppercase">
               No coding activity recorded in the last 7 days.
             </div>
           )}
@@ -172,9 +172,9 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
               valueFormatter={(value) => `${value}h`}
             />
           ) : stats.hasActivity ? (
-            <div className="h-64 border-4 border-black bg-muted" />
+            <div className="bg-muted h-64 border-4 border-black" />
           ) : (
-            <div className="flex h-64 items-center justify-center border-4 border-black bg-muted p-4 text-center text-sm font-black uppercase">
+            <div className="bg-muted flex h-64 items-center justify-center border-4 border-black p-4 text-center text-sm font-black uppercase">
               No language usage available for this period.
             </div>
           )}
@@ -185,25 +185,25 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
         <p className="font-display text-2xl uppercase">
           {providerName} Profile
         </p>
-        <p className="mt-2 text-xs font-black uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-xs font-black uppercase">
           {isWakatime
-            ? "View my public Wakatime profile."
-            : "Live streak heatmap (UTC) from Hackatime user 30609."}
+            ? 'View my public Wakatime profile.'
+            : 'Live streak heatmap (UTC) from Hackatime user 30609.'}
         </p>
         {!isWakatime && (
           <Link
             href="https://heatmap.shymike.dev/?id=30609&timezone=UTC"
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-4 block border-4 border-black bg-muted p-2 shadow-retro-sm"
+            className="bg-muted shadow-retro-sm mt-4 block border-4 border-black p-2"
             aria-label="Open Hack Club streak heatmap"
           >
             <Image
               src="https://heatmap.shymike.dev/?id=30609&timezone=UTC"
-              alt="Muhammad Fiaz Hack Club streak heatmap"
+              alt="Mahmoud Walid Hack Club streak heatmap"
               width={1200}
               height={260}
-              className="h-auto w-full border-2 border-black bg-card"
+              className="bg-card h-auto w-full border-2 border-black"
               loading="lazy"
               unoptimized
             />
@@ -226,7 +226,7 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
               {stats.topLanguages.map((language) => (
                 <li
                   key={language.name}
-                  className="flex items-center justify-between border-2 border-black bg-muted px-3 py-2 font-bold uppercase"
+                  className="bg-muted flex items-center justify-between border-2 border-black px-3 py-2 font-bold uppercase"
                 >
                   <span>{language.name}</span>
                   <AnimatedNumberTicker
@@ -239,7 +239,7 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
             </ul>
           </div>
         ) : (
-          <div className="mt-4 border-2 border-black bg-muted px-3 py-4 text-center text-sm font-black uppercase">
+          <div className="bg-muted mt-4 border-2 border-black px-3 py-4 text-center text-sm font-black uppercase">
             No language breakdown for this date range.
           </div>
         )}
@@ -250,30 +250,30 @@ export function HackatimeBento({ stats }: { stats: HackatimePayload | null }) {
           {providerName} Validation Snapshot
         </p>
         <div className="mt-4 space-y-2">
-          <div className="flex items-center justify-between border-2 border-black bg-muted px-3 py-2 font-bold uppercase">
+          <div className="bg-muted flex items-center justify-between border-2 border-black px-3 py-2 font-bold uppercase">
             <span>Grand Total</span>
             <AnimatedNumberTicker
               value={totalHours.value}
               decimals={1}
-              suffix={totalHours.suffix ? ` ${totalHours.suffix}` : "h"}
+              suffix={totalHours.suffix ? ` ${totalHours.suffix}` : 'h'}
             />
           </div>
-          <div className="flex items-center justify-between border-2 border-black bg-muted px-3 py-2 font-bold uppercase">
+          <div className="bg-muted flex items-center justify-between border-2 border-black px-3 py-2 font-bold uppercase">
             <span>Daily Average</span>
             <AnimatedNumberTicker
               value={dailyAverage.value}
               decimals={1}
               suffix={
-                dailyAverage.suffix ? ` ${dailyAverage.suffix}` : " h/day"
+                dailyAverage.suffix ? ` ${dailyAverage.suffix}` : ' h/day'
               }
             />
           </div>
-          <div className="flex items-center justify-between border-2 border-black bg-muted px-3 py-2 font-bold uppercase">
+          <div className="bg-muted flex items-center justify-between border-2 border-black px-3 py-2 font-bold uppercase">
             <span>Today Seconds</span>
             <span>{stats.todaySeconds}</span>
           </div>
         </div>
-        <p className="mt-3 text-xs font-black uppercase text-muted-foreground">
+        <p className="text-muted-foreground mt-3 text-xs font-black uppercase">
           Values are validated from {providerName} API endpoints.
         </p>
       </BentoCard>

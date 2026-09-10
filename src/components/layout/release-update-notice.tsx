@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { animate } from "animejs";
-import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Rocket, X } from "@/components/retroui/icons";
+import { animate } from 'animejs';
+import Link from 'next/link';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Rocket, X } from '@/components/retroui/icons';
 import {
   CURRENT_PORTFOLIO_VERSION,
   PORTFOLIO_REPO_URL,
-} from "@/lib/portfolio-version";
+} from '@/lib/portfolio-version';
 
 const RELEASE_API_URL =
-  "https://api.github.com/repos/muhammad-fiaz/portfolio/releases/latest";
-const DISMISS_STORAGE_KEY = "portfolio-release-notice-dismiss-until";
+  'https://api.github.com/repos/Mahmoud-walid/portfolio-Impressive-style/releases/latest';
+const DISMISS_STORAGE_KEY = 'portfolio-release-notice-dismiss-until';
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 function normalizeVersion(value: string): string {
-  return value.trim().replace(/^v/i, "");
+  return value.trim().replace(/^v/i, '');
 }
 
 function toVersionParts(value: string): number[] {
   return normalizeVersion(value)
-    .split(".")
+    .split('.')
     .map((part) => Number.parseInt(part, 10))
     .map((part) => (Number.isNaN(part) ? 0 : part));
 }
@@ -56,7 +56,7 @@ export function ReleaseUpdateNotice() {
 
   useEffect(() => {
     const dismissedUntil = Number.parseInt(
-      window.localStorage.getItem(DISMISS_STORAGE_KEY) ?? "0",
+      window.localStorage.getItem(DISMISS_STORAGE_KEY) ?? '0',
       10,
     );
 
@@ -71,7 +71,7 @@ export function ReleaseUpdateNotice() {
         const response = await fetch(RELEASE_API_URL, {
           signal: controller.signal,
           headers: {
-            Accept: "application/vnd.github+json",
+            Accept: 'application/vnd.github+json',
           },
         });
 
@@ -111,7 +111,7 @@ export function ReleaseUpdateNotice() {
       opacity: [0, 1],
       translateY: [14, 0],
       duration: 260,
-      ease: "outQuad",
+      ease: 'outQuad',
     });
   }, [isOpen]);
 
@@ -131,18 +131,18 @@ export function ReleaseUpdateNotice() {
     <div className="pointer-events-none fixed inset-x-0 bottom-3 z-120 px-4 sm:bottom-5">
       <div
         ref={panelRef}
-        className="pointer-events-auto mx-auto w-full max-w-xl border-4 border-black bg-card p-4 shadow-retro-lg"
+        className="bg-card shadow-retro-lg pointer-events-auto mx-auto w-full max-w-xl border-4 border-black p-4"
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center border-2 border-black bg-primary text-primary-foreground shadow-retro-sm">
+            <span className="bg-primary text-primary-foreground shadow-retro-sm inline-flex h-8 w-8 items-center justify-center border-2 border-black">
               <Rocket className="h-4 w-4" />
             </span>
             <div>
               <p className="font-display text-2xl uppercase">
                 New Release Available
               </p>
-              <p className="mt-1 text-sm font-medium leading-relaxed sm:text-base">
+              <p className="mt-1 text-sm leading-relaxed font-medium sm:text-base">
                 Latest portfolio release is <strong>v{latestVersion}</strong>.
                 You are on
                 <strong> v{normalizedCurrentVersion}</strong>.
@@ -163,7 +163,7 @@ export function ReleaseUpdateNotice() {
           <button
             type="button"
             onClick={handleDismiss}
-            className="inline-flex items-center justify-center border-4 border-black bg-muted px-4 py-2 text-sm font-black uppercase shadow-retro-sm transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+            className="bg-muted shadow-retro-sm inline-flex items-center justify-center border-4 border-black px-4 py-2 text-sm font-black uppercase transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
           >
             Got It (1 Day)
           </button>
@@ -171,7 +171,7 @@ export function ReleaseUpdateNotice() {
             href={`${PORTFOLIO_REPO_URL}/releases/latest`}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center justify-center border-4 border-black bg-primary px-4 py-2 text-sm font-black uppercase text-primary-foreground shadow-retro-sm transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+            className="bg-primary text-primary-foreground shadow-retro-sm inline-flex items-center justify-center border-4 border-black px-4 py-2 text-sm font-black uppercase transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
           >
             Upgrade Now
           </Link>

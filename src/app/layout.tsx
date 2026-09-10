@@ -1,20 +1,20 @@
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata, Viewport } from "next";
-import dynamic from "next/dynamic";
-import { Bungee, Press_Start_2P, Space_Grotesk } from "next/font/google";
-import { Suspense } from "react";
-import "./globals.css";
-import { AnimePageAnimator } from "@/components/layout/anime-page-animator";
-import { Footer } from "@/components/layout/footer";
-import { GoogleAnalytics } from "@/components/layout/google-analytics";
-import { GoogleTagManager } from "@/components/layout/google-tag-manager";
-import { Navbar } from "@/components/layout/navbar";
-import { RouteProgressBar } from "@/components/layout/route-progress-bar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata, Viewport } from 'next';
+import dynamic from 'next/dynamic';
+import { Bungee, Press_Start_2P, Space_Grotesk } from 'next/font/google';
+import { Suspense } from 'react';
+import './globals.css';
+import { AnimePageAnimator } from '@/components/layout/anime-page-animator';
+import { Footer } from '@/components/layout/footer';
+import { GoogleAnalytics } from '@/components/layout/google-analytics';
+import { GoogleTagManager } from '@/components/layout/google-tag-manager';
+import { Navbar } from '@/components/layout/navbar';
+import { RouteProgressBar } from '@/components/layout/route-progress-bar';
+import { ThemeProvider } from '@/components/theme-provider';
 import {
   donationUrl,
-  fiazDevUrl,
+  devUrl,
   githubUrl,
   hackatimeUrl,
   linkedinUrl,
@@ -24,28 +24,28 @@ import {
   sponsorUrl,
   xUrl,
   youtubeUrl,
-} from "@/lib/site-config";
+} from '@/lib/site-config';
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
 });
 
 const pressStart = Press_Start_2P({
-  variable: "--font-press-start",
-  weight: "400",
-  subsets: ["latin"],
+  variable: '--font-press-start',
+  weight: '400',
+  subsets: ['latin'],
 });
 
 const bungee = Bungee({
-  variable: "--font-bungee",
-  weight: "400",
-  subsets: ["latin"],
+  variable: '--font-bungee',
+  weight: '400',
+  subsets: ['latin'],
 });
 
 const BusinessScaleNotice = dynamic(
   () =>
-    import("@/components/layout/business-scale-notice").then(
+    import('@/components/layout/business-scale-notice').then(
       (module) => module.BusinessScaleNotice,
     ),
   {
@@ -55,7 +55,7 @@ const BusinessScaleNotice = dynamic(
 
 const CookieNotice = dynamic(
   () =>
-    import("@/components/layout/cookie-notice").then(
+    import('@/components/layout/cookie-notice').then(
       (module) => module.CookieNotice,
     ),
   {
@@ -65,7 +65,7 @@ const CookieNotice = dynamic(
 
 const ReleaseUpdateNotice = dynamic(
   () =>
-    import("@/components/layout/release-update-notice").then(
+    import('@/components/layout/release-update-notice').then(
       (module) => module.ReleaseUpdateNotice,
     ),
   {
@@ -75,7 +75,7 @@ const ReleaseUpdateNotice = dynamic(
 
 const BusinessInquiryPopup = dynamic(
   () =>
-    import("@/components/layout/business-inquiry-popup").then(
+    import('@/components/layout/business-inquiry-popup').then(
       (module) => module.BusinessInquiryPopup,
     ),
   {
@@ -85,84 +85,84 @@ const BusinessInquiryPopup = dynamic(
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "Muhammad Fiaz Portfolio",
+  applicationName: 'Mahmoud Walid Portfolio',
   title: {
-    default: "Muhammad Fiaz | Founder, Entrepreneur, Full Stack Developer",
-    template: "%s | Muhammad Fiaz",
+    default: 'Mahmoud Walid | Founder, Entrepreneur, Full Stack Developer',
+    template: '%s | Mahmoud Walid',
   },
   description:
-    "High-converting personal portfolio of Muhammad Fiaz. Founder, Entrepreneur, Full Stack Developer, Freelancer and Full-Time Open-Sourcerer.",
+    'High-converting personal portfolio of Mahmoud Walid. Founder, Entrepreneur, Full Stack Developer, Freelancer and Full-Time Open-Sourcerer.',
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
   keywords: [
-    "Muhammad Fiaz",
-    "muhammadfiaz.com",
-    "Full Stack Developer",
-    "Next.js developer",
-    "TypeScript developer",
-    "Freelancer",
-    "Startup product engineer",
-    "Open-Sourcerer",
-    "WakaTime",
-    "Portfolio",
-    "India",
+    'Mahmoud Walid',
+    'mahmoudwalid.com',
+    'Frontend engineer',
+    'Next.js developer',
+    'TypeScript developer',
+    'Freelancer',
+    'Startup product engineer',
+    'Open-Sourcerer',
+    'WakaTime',
+    'Portfolio',
+    'India',
   ],
-  creator: "Muhammad Fiaz",
-  publisher: "Muhammad Fiaz",
+  creator: 'Mahmoud Walid',
+  publisher: 'Mahmoud Walid',
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   openGraph: {
-    title: "Muhammad Fiaz | Founder, Entrepreneur, Full Stack Developer",
+    title: 'Mahmoud Walid | Founder, Entrepreneur, Full Stack Developer',
     description:
-      "25+ happy clients worldwide, 99.9% delivery, and modern full stack products built with speed.",
+      '25+ happy clients worldwide, 99.9% delivery, and modern full stack products built with speed.',
     url: siteUrl,
-    siteName: "Muhammad Fiaz",
-    type: "website",
-    locale: "en_US",
+    siteName: 'Mahmoud Walid',
+    type: 'website',
+    locale: 'en_US',
     images: [
       {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "Muhammad Fiaz Portfolio v5",
+        alt: 'Mahmoud Walid Portfolio v5',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Muhammad Fiaz",
+    card: 'summary_large_image',
+    title: 'Mahmoud Walid',
     description:
-      "Founder, Entrepreneur, Full Stack Developer, Freelancer and Full-Time Open-Sourcerer.",
+      'Founder, Entrepreneur, Full Stack Developer, Freelancer and Full-Time Open-Sourcerer.',
     images: [ogImageUrl],
-    creator: "@muhammadfiaz_",
+    creator: '@mahmoudwalid_',
   },
 };
 
 export function generateViewport(): Viewport {
   return {
     themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "#ff7a00" },
-      { media: "(prefers-color-scheme: dark)", color: "#ff9d00" },
+      { media: '(prefers-color-scheme: light)', color: '#ff7a00' },
+      { media: '(prefers-color-scheme: dark)', color: '#ff9d00' },
     ],
-    colorScheme: "light dark",
+    colorScheme: 'light dark',
   };
 }
 
-const DEFAULT_GTM_ID = "GTM-5BQ5RPW2";
-const DEFAULT_GA_ID = "G-SDJ0K1Y70X";
+const DEFAULT_GTM_ID = 'GTM-5BQ5RPW2';
+const DEFAULT_GA_ID = 'G-SDJ0K1Y70X';
 
 function serializeJsonLd(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
+  return JSON.stringify(value).replace(/</g, '\\u003c');
 }
 
 const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto'||stored==='system')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=(mode==='auto'||mode==='system')?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'||mode==='system'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`;
@@ -174,14 +174,14 @@ export default function RootLayout({
 }>) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || DEFAULT_GTM_ID;
   const gaId = process.env.NEXT_PUBLIC_GA_ID || DEFAULT_GA_ID;
-  const shouldLoadAnalytics = process.env.NODE_ENV === "production";
+  const shouldLoadAnalytics = process.env.NODE_ENV === 'production';
 
   const personJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Muhammad Fiaz",
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Mahmoud Walid',
     url: siteUrl,
-    jobTitle: "Founder, Entrepreneur, Full Stack Developer",
+    jobTitle: 'Founder, Entrepreneur, Full Stack Developer',
     sameAs: [
       githubUrl,
       linkedinUrl,
@@ -191,48 +191,48 @@ export default function RootLayout({
       linkHubUrl,
       sponsorUrl,
       donationUrl,
-      fiazDevUrl,
+      devUrl,
     ],
     address: {
-      "@type": "PostalAddress",
-      addressCountry: "IN",
+      '@type': 'PostalAddress',
+      addressCountry: 'IN',
     },
   };
 
   const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Muhammad Fiaz",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Mahmoud Walid',
     url: siteUrl,
-    inLanguage: "en",
+    inLanguage: 'en',
     publisher: {
-      "@type": "Person",
-      name: "Muhammad Fiaz",
+      '@type': 'Person',
+      name: 'Mahmoud Walid',
       url: siteUrl,
     },
-    sameAs: [linkHubUrl, fiazDevUrl, sponsorUrl, donationUrl],
+    sameAs: [linkHubUrl, devUrl, sponsorUrl, donationUrl],
     potentialAction: {
-      "@type": "SearchAction",
+      '@type': 'SearchAction',
       target: `${siteUrl}/project?query={search_term_string}`,
-      "query-input": "required name=search_term_string",
+      'query-input': 'required name=search_term_string',
     },
   };
 
   const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Fiaz Technologies",
-    url: fiazDevUrl,
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Mahmoud Walid Technologies',
+    url: devUrl,
     founder: {
-      "@type": "Person",
-      name: "Muhammad Fiaz",
+      '@type': 'Person',
+      name: 'Mahmoud Walid',
       url: siteUrl,
     },
     sameAs: [githubUrl, linkedinUrl, xUrl, youtubeUrl, linkHubUrl],
     sponsor: {
-      "@type": "Offer",
+      '@type': 'Offer',
       url: sponsorUrl,
-      name: "Sponsor Muhammad Fiaz on GitHub",
+      name: 'Sponsor Mahmoud Walid on GitHub',
     },
     funding: donationUrl,
   };

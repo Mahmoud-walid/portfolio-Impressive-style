@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { animate } from "animejs";
-import { useEffect, useRef } from "react";
+import { animate } from 'animejs';
+import { useEffect, useRef } from 'react';
 
 export function InitialLoader() {
   const barRef = useRef<HTMLDivElement>(null);
@@ -14,9 +14,9 @@ export function InitialLoader() {
     const bar = barRef.current;
 
     const progressAnim = animate(bar, {
-      width: ["0%", "100%"],
+      width: ['0%', '100%'],
       duration: 1800,
-      ease: "outCubic",
+      ease: 'outCubic',
     });
 
     return () => {
@@ -25,19 +25,19 @@ export function InitialLoader() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-70 flex items-center justify-center bg-background/95 px-4">
-      <div className="w-full max-w-lg border-4 border-black bg-card p-4 shadow-retro-lg sm:p-6">
-        <p className="font-pixel text-2xl uppercase text-foreground sm:text-3xl">
-          Muhammad Fiaz
+    <div className="bg-background/95 fixed inset-0 z-70 flex items-center justify-center px-4">
+      <div className="bg-card shadow-retro-lg w-full max-w-lg border-4 border-black p-4 sm:p-6">
+        <p className="font-pixel text-foreground text-2xl uppercase sm:text-3xl">
+          Mahmoud Walid
         </p>
-        <p className="mt-2 text-sm font-black uppercase text-muted-foreground sm:text-base">
+        <p className="text-muted-foreground mt-2 text-sm font-black uppercase sm:text-base">
           Loading Workspace
           <span className="animate-dots" />
         </p>
-        <div className="mt-5 h-7 border-4 border-black bg-muted p-1 sm:h-8">
+        <div className="bg-muted mt-5 h-7 border-4 border-black p-1 sm:h-8">
           <div
             ref={barRef}
-            className="h-full w-0 border-2 border-black bg-primary shadow-retro-sm"
+            className="bg-primary shadow-retro-sm h-full w-0 border-2 border-black"
           />
         </div>
       </div>
