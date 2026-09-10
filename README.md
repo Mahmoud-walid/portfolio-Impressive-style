@@ -52,14 +52,12 @@ bun run lint
 bunx tsc --noEmit
 ```
 
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before opening issues or pull requests.
-
 
 ## Support
 
 If this project helped you, please star the repository:
 
-https://github.com/muhammad-fiaz/portfolio
+https://github.com/Mahmoud-walid/portfolio-Impressive-style
