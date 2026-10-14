@@ -10,7 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@ark-ui/react": "^5.38.1",
+    "@ark-ui/react": "^5.39.3",
     "@base-ui/react": "^1.7.0",
     "@headlessui/react": "^2.2.10",
     "@hookform/resolvers": "^5.9.1",
